@@ -1,4 +1,5 @@
 import userModel from "../../models/userModel.js"
+import bcrypt from 'bcrypt'
 
 const create = async (req, res) => {
 	const user = req.body
@@ -9,7 +10,11 @@ const create = async (req, res) => {
 			fields: dataValidated.error.flatten().fieldErrors
 		})
 	}
+
+	dataValidated.data.pass = await Hash(dataValidated.data.pass);
+
 	const result = await userModel.create(dataValidated.data)
+	delete dataValidated.data
 	res.json({
 		success: "Usuário adicionado com sucesso!",
 		user: result

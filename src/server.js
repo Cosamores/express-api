@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', userRouter)
 app.use('/product', productRouter)
-
+app.use('/auth', authRouter)
 //run server 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em ${HOST}:${PORT}`)
